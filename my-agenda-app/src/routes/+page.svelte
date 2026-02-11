@@ -18,7 +18,7 @@
 <main>
     <h1>SvelteKit Agendas App</h1>
     <div class="add-agenda">
-        <input class="agenda-input" bind:value={newAgenda} placeholder="Add a new agend" />
+        <input class="agenda-input" bind:value={newAgenda} placeholder="Add a new agend" on:keydown={(e) => e.key === 'Enter' && addAgenda()} />
             <button class="add-button" on:click={addAgenda}>Add</button>
     </div>
     <ul class="agenda-list">
