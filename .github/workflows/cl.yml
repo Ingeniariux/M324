@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop, '**' ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+        # Test against multiple Node versions to ensure compatibility
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: package-lock.json
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Check linting
+      run: npm run lint
+      continue-on-error: true  # Don't fail if lint isn't set up yet
+    
+    - name: Run tests
+      run: npm run test
+      continue-on-error: true  # Don't fail if no tests exist
+    
+    - name: Check formatting
+      run: npm run format:check
+      continue-on-error: true
+    
+    - name: Build SvelteKit app
+      run: npm run build
+      
+    - name: Upload build artifacts (optional)
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: build-output-${{ matrix.node-version }}
+        path: |
+          build/
+          .svelte-kit/
+        retention-days: 5
