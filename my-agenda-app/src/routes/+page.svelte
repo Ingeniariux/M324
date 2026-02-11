@@ -128,7 +128,7 @@ transition: all 0.3s ease;
 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 .agenda-list.exploding .agenda-item {
-animation: explode 0.6s ease-out forwards;
+animation: explode 0.9s ease-out forwards;
 }
 .agenda-item:hover {
 border-color: #007bff;
