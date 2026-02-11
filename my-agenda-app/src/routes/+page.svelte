@@ -32,12 +32,16 @@
 </main>
 <style>
 main {
-font-family: Arial, sans-serif;
-text-align: center;
-margin: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    margin: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
 }
 h1 {
-color: #333;
+    color: #343a40;
+    margin-bottom: 20px;
 }
 .add-agenda {
 margin-bottom: 20px;
