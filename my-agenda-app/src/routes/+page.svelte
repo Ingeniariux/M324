@@ -27,7 +27,7 @@
     }
 </script>
 <main>
-    <h1>SvelteKit Agendas App</h1>
+    <h1>LAA Pro Ultimate</h1>
     <div class="add-agenda">
         <input class="agenda-input" bind:value={newAgenda} placeholder="Add a new task" on:keydown={(e) => e.key === 'Enter' && addAgenda()} />
             <button class="add-button" on:click={addAgenda}>Add</button>
@@ -52,10 +52,24 @@ main {
     background-color: #f8f9fa;
     border-radius: 10px;
     padding: 20px;
+    background: linear-gradient(#f8f9fa, #f8f9fa) padding-box, linear-gradient(180deg, #007bff, #0056b3, #007bff, #0056b3, #007bff) border-box;
+    background-attachment: fixed;
+    animation: borderCircleGradient 4s ease forwards;
 }
 h1 {
-    color: #343a40;
+    background: linear-gradient(135deg, #007bff, #0056b3, #00ffea, #00b7ff);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-bottom: 20px;
+    font-size: 3.5em;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: gradientShift 4s ease, titlePulse 2s ease-in-out;
+    text-shadow: 0 0 30px rgba(0, 123, 255, 0.3);
+    filter: drop-shadow(0 2px 10px rgba(79, 164, 255, 0.3));
 }
 .add-agenda {
 margin-bottom: 20px;
@@ -114,7 +128,7 @@ transition: all 0.3s ease;
 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 .agenda-list.exploding .agenda-item {
-animation: explode 0.6s ease-out forwards;
+animation: explode 0.9s ease-out forwards;
 }
 .agenda-item:hover {
 border-color: #007bff;
@@ -140,7 +154,43 @@ box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
 .remove-button:active {
 transform: scale(0.98);
 }
-@keyframes slideIn {
+@keyframes borderCircleGradient {
+0% {
+    border-image: linear-gradient(135deg, #007bff, #0056b3, #007bff) 1;
+    background: linear-gradient(#f8f9fa, #f8f9fa) padding-box, linear-gradient(135deg, #007bff, #0056b3, #007bff) border-box;
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.6);
+}
+50% {
+    border-image: linear-gradient(-45deg, #007bff, #0056b3, #007bff) 1;
+    background: linear-gradient(#f8f9fa, #f8f9fa) padding-box, linear-gradient(-45deg, #007bff, #0056b3, #007bff) border-box;
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.6);
+}
+100% {
+    border-image: linear-gradient(-45deg, #007bff, #0056b3, #007bff) 1;
+    background: linear-gradient(#f8f9fa, #f8f9fa) padding-box, linear-gradient(-45deg, #007bff, #0056b3, #007bff) border-box;
+    box-shadow: 0 0 0px rgba(0, 123, 255, 0);
+    border-color: #e0e0e0;
+}
+}
+@keyframes gradientShift {
+0% {
+background-position: 0% 50%;
+}
+50% {
+background-position: 100% 50%;
+}
+100% {
+background-position: 0% 50%;
+}
+}
+@keyframes titlePulse {
+0%, 100% {
+filter: drop-shadow(0 2px 10px rgba(255, 107, 0, 0.2));
+}
+50% {
+filter: drop-shadow(0 4px 20px rgba(0, 123, 255, 0.4)) drop-shadow(0 0 15px rgba(255, 107, 0, 0.3));
+}
+}
 from {
 opacity: 0;
 transform: translateY(-10px);
@@ -148,7 +198,6 @@ transform: translateY(-10px);
 to {
 opacity: 1;
 transform: translateY(0);
-}
 }
 .nuke-button {
 padding: 12px 24px;
