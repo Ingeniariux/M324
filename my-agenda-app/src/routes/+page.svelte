@@ -6,6 +6,7 @@
     let newAgenda = '';
     let isExploding = false;
     let isNukeDisappearing = false;
+    let isSorting = false;
     function addAgenda() {
         if (newAgenda) {
             agenda = [...agenda, newAgenda];
@@ -25,17 +26,27 @@
             isNukeDisappearing = false;
         }, 900);
     }
+    function sortAgenda() {
+        isSorting = true;
+        agenda = [...agenda].sort((a, b) => a.localeCompare(b));
+        setTimeout(() => {
+            isSorting = false;
+        }, 600);
+    }
 </script>
 <main>
     <h1>LAA Pro Ultimate</h1>
     <div class="add-agenda">
         <input class="agenda-input" bind:value={newAgenda} placeholder="Add a new task" on:keydown={(e) => e.key === 'Enter' && addAgenda()} />
             <button class="add-button" on:click={addAgenda}>Add</button>
+            {#if agenda.length > 1}
+                <button class="sort-button" on:click={sortAgenda}>🔤 Sort</button>
+            {/if}
             {#if agenda.length > 0}
                 <button class="nuke-button" class:disappearing={isNukeDisappearing} on:click={nukeAll}>☢️ NUKE ALL</button>
             {/if}
     </div>
-    <ul class="agenda-list" class:exploding={isExploding}>
+    <ul class="agenda-list" class:exploding={isExploding} class:sorting={isSorting}>
         {#each agenda as agenda, index (index)}
         <li class="agenda-item">
             {agenda}
@@ -113,6 +124,9 @@ box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
 .agenda-list {
 list-style-type: none;
 padding: 0;
+}
+.agenda-list.sorting .agenda-item {
+animation: flyIn 0.6s ease-out;
 }
 .agenda-item {
 display: flex;
@@ -226,6 +240,27 @@ text-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
 transform: scale(0.95);
 box-shadow: 0 0 20px rgba(255, 107, 0, 0.6);
 }
+.sort-button {
+padding: 12px 24px;
+background-color: #28a745;
+color: white;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+font-size: 16px;
+font-weight: 600;
+transition: all 0.3s ease;
+box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+}
+.sort-button:hover {
+background-color: #218838;
+transform: translateY(-2px);
+box-shadow: 0 6px 12px rgba(40, 167, 69, 0.4);
+}
+.sort-button:active {
+transform: translateY(0);
+box-shadow: 0 2px 4px rgba(40, 167, 69, 0.3);
+}
 @keyframes nukePulse {
 0%, 100% {
 box-shadow: 0 0 15px rgba(255, 107, 0, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.2);
@@ -259,6 +294,16 @@ box-shadow: 0 0 40px rgba(255, 107, 0, 0.9), 0 0 60px rgba(255, 200, 0, 0.7), in
 opacity: 0;
 transform: scale(0) rotate(180deg) translateY(-100px);
 box-shadow: 0 0 0px rgba(255, 107, 0, 0);
+}
+}
+@keyframes flyIn {
+0% {
+opacity: 0;
+transform: translateY(-20px) scale(0.9);
+}
+100% {
+opacity: 1;
+transform: translateY(0) scale(1);
 }
 }
 </style>
