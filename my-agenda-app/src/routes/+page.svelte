@@ -22,7 +22,7 @@
             <button class="add-button" on:click={addAgenda}>Add</button>
     </div>
     <ul class="agenda-list">
-        {#each agenda as agenda, index (agenda)}
+        {#each agenda as agenda, index (index)}
         <li class="agenda-item">
             {agenda}
             <button class="remove-button" on:click={() => removeAgenda(index)}>Remove</button>
