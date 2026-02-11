@@ -27,7 +27,7 @@
     }
 </script>
 <main>
-    <h1>SvelteKit Agendas App</h1>
+    <h1>LAA Pro Ultimate</h1>
     <div class="add-agenda">
         <input class="agenda-input" bind:value={newAgenda} placeholder="Add a new task" on:keydown={(e) => e.key === 'Enter' && addAgenda()} />
             <button class="add-button" on:click={addAgenda}>Add</button>
@@ -54,8 +54,19 @@ main {
     padding: 20px;
 }
 h1 {
-    color: #343a40;
+    background: linear-gradient(135deg, #007bff, #0056b3, #ff6b00, #ff9500);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-bottom: 20px;
+    font-size: 3.5em;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: gradientShift 4s ease infinite, titlePulse 2s ease-in-out infinite;
+    text-shadow: 0 0 30px rgba(0, 123, 255, 0.3);
+    filter: drop-shadow(0 2px 10px rgba(255, 107, 0, 0.2));
 }
 .add-agenda {
 margin-bottom: 20px;
@@ -140,7 +151,25 @@ box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
 .remove-button:active {
 transform: scale(0.98);
 }
-@keyframes slideIn {
+@keyframes gradientShift {
+0% {
+background-position: 0% 50%;
+}
+50% {
+background-position: 100% 50%;
+}
+100% {
+background-position: 0% 50%;
+}
+}
+@keyframes titlePulse {
+0%, 100% {
+filter: drop-shadow(0 2px 10px rgba(255, 107, 0, 0.2));
+}
+50% {
+filter: drop-shadow(0 4px 20px rgba(0, 123, 255, 0.4)) drop-shadow(0 0 15px rgba(255, 107, 0, 0.3));
+}
+}
 from {
 opacity: 0;
 transform: translateY(-10px);
@@ -148,7 +177,6 @@ transform: translateY(-10px);
 to {
 opacity: 1;
 transform: translateY(0);
-}
 }
 .nuke-button {
 padding: 12px 24px;
