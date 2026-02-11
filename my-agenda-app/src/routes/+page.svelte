@@ -52,6 +52,9 @@ main {
     background-color: #f8f9fa;
     border-radius: 10px;
     padding: 20px;
+    background: linear-gradient(#f8f9fa, #f8f9fa) padding-box, linear-gradient(180deg, #007bff, #0056b3, #007bff, #0056b3, #007bff) border-box;
+    background-attachment: fixed;
+    animation: borderCircleGradient 4s ease forwards;
 }
 h1 {
     background: linear-gradient(135deg, #007bff, #0056b3, #00ffea, #00b7ff);
@@ -150,6 +153,24 @@ box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
 }
 .remove-button:active {
 transform: scale(0.98);
+}
+@keyframes borderCircleGradient {
+0% {
+    border-image: linear-gradient(135deg, #007bff, #0056b3, #007bff) 1;
+    background: linear-gradient(#f8f9fa, #f8f9fa) padding-box, linear-gradient(135deg, #007bff, #0056b3, #007bff) border-box;
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.6);
+}
+50% {
+    border-image: linear-gradient(-45deg, #007bff, #0056b3, #007bff) 1;
+    background: linear-gradient(#f8f9fa, #f8f9fa) padding-box, linear-gradient(-45deg, #007bff, #0056b3, #007bff) border-box;
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.6);
+}
+100% {
+    border-image: linear-gradient(-45deg, #007bff, #0056b3, #007bff) 1;
+    background: linear-gradient(#f8f9fa, #f8f9fa) padding-box, linear-gradient(-45deg, #007bff, #0056b3, #007bff) border-box;
+    box-shadow: 0 0 0px rgba(0, 123, 255, 0);
+    border-color: #e0e0e0;
+}
 }
 @keyframes gradientShift {
 0% {
