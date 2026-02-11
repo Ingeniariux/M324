@@ -54,7 +54,7 @@ main {
     padding: 20px;
 }
 h1 {
-    background: linear-gradient(135deg, #007bff, #0056b3, #ff6b00, #ff9500);
+    background: linear-gradient(135deg, #007bff, #0056b3, #00ffea, #00b7ff);
     background-size: 300% 300%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -64,9 +64,9 @@ h1 {
     font-weight: 900;
     letter-spacing: 2px;
     text-transform: uppercase;
-    animation: gradientShift 4s ease infinite, titlePulse 2s ease-in-out infinite;
+    animation: gradientShift 4s ease, titlePulse 2s ease-in-out;
     text-shadow: 0 0 30px rgba(0, 123, 255, 0.3);
-    filter: drop-shadow(0 2px 10px rgba(255, 107, 0, 0.2));
+    filter: drop-shadow(0 2px 10px rgba(79, 164, 255, 0.3));
 }
 .add-agenda {
 margin-bottom: 20px;
