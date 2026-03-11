@@ -3,7 +3,7 @@
 # -------------------------
 FROM node:20-alpine AS builder
 
-WORKDIR /app
+WORKDIR /my-agenda-app
 
 COPY package*.json ./
 RUN npm install
@@ -17,7 +17,8 @@ RUN npm run build
 # -------------------------
 FROM nginx:alpine
 
-COPY --from=builder /app/build /usr/share/nginx/html
+# Copy from the correct output directory (docs instead of build)
+COPY --from=builder /my-agenda-app/docs /usr/share/nginx/html
 
 EXPOSE 80
 
